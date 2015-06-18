@@ -33,16 +33,20 @@ public class Message {
         String msg = event.getMessage();
         IThrowableProxy throwableProxy = event.getThrowableProxy();
 
-        if (msg.isEmpty() && throwableProxy.getMessage() != null) {
+        if (msg.isEmpty() && throwableProxy != null && throwableProxy.getMessage() != null) {
             msg = throwableProxy.getMessage();
         }
 
-        StackTraceElementProxy[] traces = throwableProxy.getStackTraceElementProxyArray();
-        if (msg.isEmpty() && traces.length > 0) {
-            msg = traces[0].getStackTraceElement().toString();
+        if (throwableProxy != null) {
+            StackTraceElementProxy[] traces = throwableProxy.getStackTraceElementProxyArray();
+            if (msg.isEmpty() && traces.length > 0) {
+                msg = traces[0].getStackTraceElement().toString();
+            }
+
+            msg = "[" + throwableProxy.getClassName() + "] " + msg;
         }
 
-        return "[" + throwableProxy.getClassName() + "] " + msg;
+        return msg;
     }
 
     private String generateSecretCode(String projectKey) {

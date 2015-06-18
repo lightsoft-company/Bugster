@@ -23,9 +23,9 @@ public class ExceptionSender {
     private Exception lastError;
 
     public void event(ILoggingEvent event, BugsterConfig config) {
-        Message msg = new Message(event, config);
+        if (config.isEnabled() && isError(event)) {
+            Message msg = new Message(event, config);
 
-        if (isError(event)) {
             boolean success = sendException(msg, config);
             if (!success) {
                 logger.info("Failed to send log message through API: " + lastError);
@@ -44,6 +44,6 @@ public class ExceptionSender {
     }
 
     private boolean isError(ILoggingEvent event) {
-        return event.getLevel().equals(Level.ERROR);
+        return event.getLevel().equals(Level.ERROR) || event.getLevel().equals(Level.WARN);
     }
 }
