@@ -33,13 +33,13 @@ public class Message {
         String msg = event.getMessage();
         IThrowableProxy throwableProxy = event.getThrowableProxy();
 
-        if (msg.isEmpty() && throwableProxy != null && throwableProxy.getMessage() != null) {
+        if ((msg == null || msg.isEmpty()) && throwableProxy != null && throwableProxy.getMessage() != null) {
             msg = throwableProxy.getMessage();
         }
 
         if (throwableProxy != null) {
             StackTraceElementProxy[] traces = throwableProxy.getStackTraceElementProxyArray();
-            if (msg.isEmpty() && traces.length > 0) {
+            if ((msg == null || msg.isEmpty()) && traces.length > 0) {
                 msg = traces[0].getStackTraceElement().toString();
             }
 
