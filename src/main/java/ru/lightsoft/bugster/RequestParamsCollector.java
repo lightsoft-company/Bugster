@@ -5,12 +5,11 @@ import org.slf4j.MDC;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
-import java.util.Objects;
 
 import static com.google.common.collect.Maps.newHashMap;
 
 /**
- * Получает данные из запроса и добавляет их в MDC
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ MDC
  */
 public class RequestParamsCollector {
     public void collectParams(HttpServletRequest req) {
@@ -21,9 +20,9 @@ public class RequestParamsCollector {
         Map<String, Object> normalizedParams = normalizeParams(params);
 
         String paramsStr = Utils.print(normalizedParams);
-        if (Objects.equals(req.getMethod(), "POST")) {
+        if (req.getMethod().equals("POST")) {
             MDC.put(Utils.POST, paramsStr);
-        } else if (Objects.equals(req.getMethod(), "GET")) {
+        } else if (req.getMethod().equals("GET")) {
             MDC.put(Utils.GET, paramsStr);
         }
 
@@ -39,7 +38,7 @@ public class RequestParamsCollector {
     }
 
     /**
-     * Преобразует значение параметра из массива в строку, если всего одно значение
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      */
     private Map<String, Object> normalizeParams(Map<String, String[]> params) {
         Map<String, Object> res = newHashMap();
