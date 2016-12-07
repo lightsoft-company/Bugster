@@ -8,7 +8,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import java.util.Map;
 
 /**
- * Сообщение с ошибкой и доп. данными для отправки в Bugster
+ * Г‘Г®Г®ГЎГ№ГҐГ­ГЁГҐ Г± Г®ГёГЁГЎГЄГ®Г© ГЁ Г¤Г®ГЇ. Г¤Г Г­Г­Г»Г¬ГЁ Г¤Г«Гї Г®ГІГЇГ°Г ГўГЄГЁ Гў Bugster
  */
 public class Message {
     private String environmentName;
@@ -30,7 +30,7 @@ public class Message {
     }
 
     private String generateMsgTitle(ILoggingEvent event) {
-        String msg = event.getMessage();
+        String msg = event.getFormattedMessage();
         IThrowableProxy throwableProxy = event.getThrowableProxy();
 
         if ((msg == null || msg.isEmpty()) && throwableProxy != null && throwableProxy.getMessage() != null) {
