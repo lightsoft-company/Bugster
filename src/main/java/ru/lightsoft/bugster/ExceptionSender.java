@@ -22,7 +22,7 @@ public class ExceptionSender {
 
     private Exception lastError;
 
-    public void event(ILoggingEvent event, BugsterConfig config) {
+    public boolean event(ILoggingEvent event, BugsterConfig config) {
         if (config.isEnabled() && isError(event)) {
             Message msg = new Message(event, config);
 
@@ -30,7 +30,9 @@ public class ExceptionSender {
             if (!success) {
                 logger.info("Failed to send log message through API: " + lastError);
             }
+            return success;
         }
+        return false;
     }
 
     private boolean sendException(Message msg, BugsterConfig config) {
