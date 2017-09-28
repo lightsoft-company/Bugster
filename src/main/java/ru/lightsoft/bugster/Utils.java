@@ -20,7 +20,7 @@ import java.util.*;
 import static com.google.common.collect.Maps.newHashMap;
 
 /**
- * Доп. методы для обработки ошибок
+ * Г„Г®ГЇ. Г¬ГҐГІГ®Г¤Г» Г¤Г«Гї Г®ГЎГ°Г ГЎГ®ГІГЄГЁ Г®ГёГЁГЎГ®ГЄ
  */
 public class Utils {
     public static final String POST = "post";
@@ -104,7 +104,7 @@ public class Utils {
     }
 
     public static boolean httpPost(String url, String httpParams, HashMap<String, String> headers) throws Exception {
-        HttpClient client = HttpClientBuilder.create().build();
+        HttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(org.apache.http.client.config.RequestConfig.custom().setConnectionRequestTimeout(5000).setConnectTimeout(5000).build()).build();
         HttpPost post = new HttpPost(url);
 
         // add header
